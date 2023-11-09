@@ -12,6 +12,7 @@ namespace shambalaRegistryExample_09_11_2023
     {
         static void Main(string[] args)
         {
+            #region
             //Console.OutputEncoding = Encoding.UTF8;
             //        Console.WriteLine(Registry.CurrentUser.Name);
             //        Console.ReadKey();
@@ -31,7 +32,9 @@ namespace shambalaRegistryExample_09_11_2023
             //PrintSubKey(Registry.CurrentConfig);
             //PrintSubKey(Registry.PerformanceData);
             //PrintSubKey(Registry.DynData);
-            PrintSubKey(Registry.CurrentUser.OpenSubKey("Printers\\ConvertUserDevModesCount"));
+            #endregion
+            //PrintSubKey(Registry.CurrentUser.OpenSubKey("Printers\\ConvertUserDevModesCount"));
+            
         }
         static void PrintSubKey(RegistryKey key)
         {
@@ -54,6 +57,21 @@ namespace shambalaRegistryExample_09_11_2023
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+        static void CreateKeyWithValue()
+        {
+            // создать под ключ  в каком либо ключе
+            RegistryKey key = Registry.CurrentUser.CreateSubKey("new_key");
+            // закрыть ключ
+            key.Close();
+        }
+
+        static void GetandChengeKeyValue()
+        {
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("new_key", true))
+            {
+                
             }
         }
     }
